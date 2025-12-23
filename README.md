@@ -7,7 +7,7 @@ A lightweight ncurses radio player written in Python for Linux.
 - Highlights current track using ICY metadata
 - Works on Raspberry Pi Zero with minimal dependencies
 
-## TODO
+## Todo
 - Plays online radio and local NAS MP3 collection
 - Add scrollbar to station list
 - Fix crash when terminal is resized smaller than station list.
