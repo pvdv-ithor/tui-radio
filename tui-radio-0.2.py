@@ -4,14 +4,16 @@ import subprocess
 import threading
 import queue
 import time
+import json
+import os
 
-STATIONS = [
-    ("Aardschok (Pinguin Radio)", "https://streams.pinguinradio.com/Aardschok192.mp3"),
-    ("Bob Radio Metal", "https://streams.radiobob.de/bob-metal/mp3-192/streams.radiobob.de/play.m3u"),
-    ("Classic21 Metal (RTBF)", "http://radio.rtbf.be/c21-metal/mp3-128/radio.rtbf.be/play.pls"),
-    ("Kink Distortion", "https://www.mp3streams.nl/zender/kink-distortion/stream/99-aac-128"),
-    ("Studio Brussel Bruut ", "https://vrt.streamabc.net/vrt-studiobrusselbruut-mp3-128-7838034"),
-]
+def load_stations():
+    path = os.path.expanduser("~/tui-radio/stations.json")
+    with open(path, "r") as f:
+        data = json.load(f)
+    return [(s["name"], s["url"]) for s in data]
+
+STATIONS = load_stations()
 
 mpv_process = None
 output_queue = queue.Queue()

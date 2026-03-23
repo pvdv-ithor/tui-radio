@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Aardschok (Pinguin Radio)",
+    "url": "https://streams.pinguinradio.com/Aardschok192.mp3"
+  },
+  {
+    "name": "Bob Radio Metal",
+    "url": "https://streams.radiobob.de/bob-metal/mp3-192/streams.radiobob.de/play.m3u"
+  },
+  {
+    "name": "Kink Distortion",
+    "url": "https://www.mp3streams.nl/zender/kink-distortion/stream/99-aac-128"
+  },
+  {
+    "name": "Studio Brussel Bruut",
+    "url": "https://vrt.streamabc.net/vrt-studiobrusselbruut-mp3-128-7838034"
+  },
+  {
+    "name": "Classic21 Metal (RTBF)",
+    "url": "http://radio.rtbf.be/c21-metal/mp3-128/radio.rtbf.be/play.pls"
+  }
+]
