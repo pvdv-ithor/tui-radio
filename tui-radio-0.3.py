@@ -6,6 +6,7 @@ import queue
 import time
 import json
 import os
+import sys
 
 def load_stations():
     path = os.path.expanduser("~/tui-radio/stations.json")
@@ -18,6 +19,56 @@ STATIONS = load_stations()
 mpv_process = None
 output_queue = queue.Queue()
 
+def run_console_mode():
+    station_name = "Starting..."
+    current_title = "Waiting for stream..."
+
+    def mpv_thread():
+        cmd = [
+            "mpv",
+            "--quiet",
+            "--term-status-msg=",
+            "--msg-level=icy=info",
+            STATIONS[0][1],
+        ]
+
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True
+        )
+
+        for line in proc.stdout:
+            if "icy-title:" in line:
+                title = line.split("icy-title:", 1)[1].strip()
+                if title:
+                    nonlocal current_title
+                    current_title = title
+
+    threading.Thread(target=mpv_thread, daemon=True).start()
+
+    while True:
+        os.system("clear")
+
+        print(r"""
+
+               _ _       
+              | (_)      
+ _ __ __ _  __| |_  ___  
+| '__/ _` |/ _` | |/ _ \ 
+| | | (_| | (_| | | (_) |
+|_|  \__,_|\__,_|_|\___/ 
+
+""")
+
+        print("\n")
+        print(f"Station: {STATIONS[0][0]}")
+        print("\n")
+        print(f"Now Playing:")
+        print(current_title)
+
+        time.sleep(1)
 
 def stop_mpv():
     global mpv_process
@@ -187,6 +238,8 @@ def main(stdscr):
             stop_mpv()
             break
 
-
 if __name__ == "__main__":
-    curses.wrapper(main)
+    if "--console" in sys.argv:
+        run_console_mode()
+    else:
+        curses.wrapper(main)
