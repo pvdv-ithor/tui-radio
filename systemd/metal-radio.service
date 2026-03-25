@@ -1,0 +1,14 @@
+[Unit]
+Description=Metal Radio
+After=bt-autoconnect.service
+Requires=bt-autoconnect.service
+
+[Service]
+ExecStartPre=/bin/sleep 3
+ExecStart=/usr/bin/python3 /home/pvdv/tui-radio/tui-radio.py --console
+WorkingDirectory=/home/pvdv/tui-radio
+Restart=on-failure
+Environment=TERM=xterm
+
+[Install]
+WantedBy=default.target

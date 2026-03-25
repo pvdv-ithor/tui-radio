@@ -1,0 +1,8 @@
+[Unit]
+Description=PulseAudio
+
+[Service]
+ExecStart=/usr/bin/pulseaudio --daemonize=no
+
+[Install]
+WantedBy=default.target
