@@ -5,8 +5,8 @@ Requires=bt-autoconnect.service
 
 [Service]
 ExecStartPre=/bin/sleep 3
-ExecStart=/usr/bin/python3 /home/{user}/tui-radio/tui-radio.py --console
-WorkingDirectory=/home/{user}/tui-radio
+WorkingDirectory=%h/tui-radio
+ExecStart=/usr/bin/python3 tui-radio.py --console
 Restart=on-failure
 Environment=TERM=xterm
 
